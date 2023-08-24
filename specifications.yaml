@@ -1,0 +1,852 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce
+  version: 1.0.0
+servers:
+  - url: http://{{dev}}users
+  - url: http://{{dev}}attachment
+  - url: http://{{dev}}brand
+  - url: http://{{dev}}shop
+  - url: http://{{dev}}category
+  - url: http://{{dev}}sub-category
+  - url: http://{{dev}}address
+  - url: http://{{dev}}products
+  - url: http://{{dev}}wishlist
+tags:
+  - name: Auth
+  - name: attachment-upload
+  - name: Brand
+  - name: Shop
+  - name: Category
+  - name: Sub-Category
+  - name: Address
+  - name: Product
+  - name: User
+  - name: Wishlist
+paths:
+  /signup:
+    post:
+      tags:
+        - Auth
+      summary: signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Sohel
+                lastName: Rana
+                email: mdsohrabhossainsohel902802@gmail.com
+                phone: "01740234739"
+                password: 244739@Sk
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Sohel
+                lastName: Rana
+                email: sk@gmail.com
+                phone: "017402447393"
+                password: 244739@Sk
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /logout:
+    post:
+      tags:
+        - Auth
+      summary: logout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Sohel
+                lastName: Rana
+                email: sk@gmail.com
+                phone: "017402447393"
+                password: 244739@Sk
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /:
+    get:
+      tags:
+        - Product
+      summary: get-all-products
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: "18"
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: "1"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Product
+      summary: Create_New_Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: First Product 19
+                description: First Product Description
+                category: 64a4e8d3740e4ff9c6ff982f
+                store: 64acbc91bf21130026ab01c9
+                subCategory: 64a4f1c41460380a4a93eaaf
+                brand: 649c22055e52e5cf9b1caaf7
+                stock: 45
+                price: 45
+                specifications:
+                  - name: Color
+                    values:
+                      - name: Red
+                        extraAmount: 234
+                      - name: Blue
+                        extraAmount: 234
+                      - name: Green
+                        extraAmount: 234
+                images:
+                  - >-
+                    https://res.cloudinary.com/dqmazmcph/image/upload/v1692552674/Ecommerce/products/screenshot-from-2023-08-09-11-40-07-1692552672684_ikdvwr.png
+                  - >-
+                    https://res.cloudinary.com/dqmazmcph/image/upload/v1692552680/Ecommerce/products/screenshot-from-2023-08-09-12-08-41-1692552672686_egzeoh.png
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /verify-request:
+    get:
+      tags:
+        - Auth
+      summary: sent-verify-request
+      parameters:
+        - name: ""
+          in: header
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGIxNWQyYjdiYTQ4ZGIwNzNjMjFhYjMiLCJpYXQiOjE2ODkzNDYwMzUsImV4cCI6MTY4OTM0OTYzNX0.jQwSC04eYi4NDoBBFJhXOgPeGYSMh5AuKvNlpLZrah0:
+    post:
+      tags:
+        - Auth
+      summary: verify-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Sohel
+                lastName: Rana
+                email: sk3@gmail.com
+                phone: "017402447393"
+                password: 244739@Sk
+      parameters:
+        - name: ""
+          in: header
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /reset-password:
+    post:
+      tags:
+        - Auth
+      summary: reset-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                prevPassword: asdf
+                newPassword: 244739@Sk
+      parameters:
+        - name: ""
+          in: header
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /forgot-password:
+    post:
+      tags:
+        - Auth
+      summary: forgot-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: mdsohrabhossainsohel902802@gmail.com
+      parameters:
+        - name: ""
+          in: header
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /set-password:
+    post:
+      tags:
+        - Auth
+      summary: set-password-by-verify-code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: mdsohrabhossainsohel902802@gmail.com
+                code: "572859"
+                newPassword: 244739@Sk
+      parameters:
+        - name: ""
+          in: header
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /refresh-token:
+    get:
+      tags:
+        - Auth
+      summary: generate-new-token
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /upload/:
+    post:
+      tags:
+        - attachment-upload
+      summary: upload-image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: string
+                  format: binary
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /upload/cloud:
+    post:
+      tags:
+        - attachment-upload
+      summary: upload-into-cloudinary
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: string
+                  format: binary
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /649c22055e52e5cf9b1caaf7:
+    put:
+      tags:
+        - Brand
+      summary: update-brand
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                name:
+                  type: string
+                  example: New Brand Sk
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDlhZmExNzFmYWU1NzlkMzJlZDczMmEiLCJpYXQiOjE2ODc5NTM4ODMsImV4cCI6MTY4ODA0MDI4M30.mvnCTPR6TcnMeAmyeOSunEjw-qFxBUAWn6kEGA_Ou0E
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /all:
+    get:
+      tags:
+        - Brand
+      summary: get-brand-list
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /649c202c818bb97394ebb46d:
+    delete:
+      tags:
+        - Brand
+      summary: delete-brand
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64acbc91bf21130026ab01c9:
+    put:
+      tags:
+        - Shop
+      summary: update-shop
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                storeName:
+                  type: string
+                  example: New Brand Sk
+                ownerName:
+                  type: string
+                  example: Sohel
+                state:
+                  type: string
+                  example: Rg
+                city:
+                  type: string
+                  example: Rg
+                mobileNumber:
+                  type: integer
+                  example: "234"
+                addressDescription:
+                  type: string
+                  example: adf
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDlhZmExNzFmYWU1NzlkMzJlZDczMmEiLCJpYXQiOjE2ODc5NTM4ODMsImV4cCI6MTY4ODA0MDI4M30.mvnCTPR6TcnMeAmyeOSunEjw-qFxBUAWn6kEGA_Ou0E
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64acbbc86ecb3f57dbe97fab:
+    delete:
+      tags:
+        - Shop
+      summary: delete-store
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64a4e8d3740e4ff9c6ff982f:
+    put:
+      tags:
+        - Category
+      summary: update-category
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                name:
+                  type: string
+                  example: New Brand sd4
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDlhZmExNzFmYWU1NzlkMzJlZDczMmEiLCJpYXQiOjE2ODc5NTM4ODMsImV4cCI6MTY4ODA0MDI4M30.mvnCTPR6TcnMeAmyeOSunEjw-qFxBUAWn6kEGA_Ou0E
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /my:
+    get:
+      tags:
+        - Category
+      summary: get-category-list
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64a4e874740e4ff9c6ff97fd:
+    delete:
+      tags:
+        - Category
+      summary: delete-category
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64a4f1c41460380a4a93eaaf:
+    put:
+      tags:
+        - Sub-Category
+      summary: update-sub-category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Hello Subu
+                category: 64a4e8d3740e4ff9c6ff982f
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDlhZmExNzFmYWU1NzlkMzJlZDczMmEiLCJpYXQiOjE2ODc5NTM4ODMsImV4cCI6MTY4ODA0MDI4M30.mvnCTPR6TcnMeAmyeOSunEjw-qFxBUAWn6kEGA_Ou0E
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64a4e8d3740e4ff9c6ff982f/my:
+    get:
+      tags:
+        - Sub-Category
+      summary: get-sub-category-list
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64a4f15b4ea96eab2b5819d2:
+    delete:
+      tags:
+        - Sub-Category
+      summary: delete-sub-category
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64a8fd206ead64547b5a5dd5:
+    put:
+      tags:
+        - Address
+      summary: update-address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                - key: 3
+                  country: Ui
+                  state: US
+                  city: UK
+                  fullName: Sohel
+                  mobileNumber: "01740244739"
+                  addressDescription: skasdf
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDlhZmExNzFmYWU1NzlkMzJlZDczMmEiLCJpYXQiOjE2ODc5NTM4ODMsImV4cCI6MTY4ODA0MDI4M30.mvnCTPR6TcnMeAmyeOSunEjw-qFxBUAWn6kEGA_Ou0E
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64a8fd206ead64547b5a5dd6:
+    delete:
+      tags:
+        - Address
+      summary: delete-address
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: "{{token}}"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /64e259a8efbc7690322cf2e0:
+    put:
+      tags:
+        - Product
+      summary: update_product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: First Product 10
+                description: First Product Description 10
+                stock: 450
+                price: 4555
+                category: 64e26849bad42fb56184572b
+                store: 64acbc91bf21130026ab01c9
+                subCategory: 64a4f1c41460380a4a93eaaf
+                brand: 649c22055e52e5cf9b1caaf7
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Product
+      summary: delete_product
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /specifications/64e259a8efbc7690322cf2e0:
+    put:
+      tags:
+        - Product
+      summary: update_product_specifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                specifications:
+                  - _id: 64e349be10cc31a6b4c8b11e
+                    name: Size
+                    values:
+                      - _id: 64e349be10cc31a6b4c8b11f
+                        name: X
+                        extraAmount: 400
+                      - _id: 64e349be10cc31a6b4c8b120
+                        name: XL
+                        extraAmount: 600
+                      - _id: 64e34c40317457e5b3ff47ae
+                        delete: true
+                      - _id: 64e34c40317457e5b3ff47af
+                        delete: true
+                      - _id: 64e34c7a317457e5b3ff47cc
+                        delete: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /deactive/64e259a8efbc7690322cf2e0:
+    put:
+      tags:
+        - Product
+      summary: deactive_product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: First Product 3
+                description: First Product Description
+                category: 64a4e8d3740e4ff9c6ff982f
+                store: 64acbc91bf21130026ab01c9
+                subCategory: 64a4f1c41460380a4a93eaaf
+                brand: 649c22055e52e5cf9b1caaf7
+                stock: 45
+                price: 45
+                specifications:
+                  - name: Color
+                    values:
+                      - name: Red
+                        extraAmount: 234
+                      - name: Blue
+                        extraAmount: 234
+                      - name: Green
+                        extraAmount: 234
+                images:
+                  - >-
+                    https://res.cloudinary.com/dqmazmcph/image/upload/v1692552674/Ecommerce/products/screenshot-from-2023-08-09-11-40-07-1692552672684_ikdvwr.png
+                  - >-
+                    https://res.cloudinary.com/dqmazmcph/image/upload/v1692552680/Ecommerce/products/screenshot-from-2023-08-09-12-08-41-1692552672686_egzeoh.png
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /offer/64e259a8efbc7690322cf2e0:
+    put:
+      tags:
+        - Product
+      summary: add_offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                offerPrice: 500
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /offer-disable/64e259a8efbc7690322cf2e0:
+    put:
+      tags:
+        - Product
+      summary: disable_offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: First Product 3
+                description: First Product Description
+                category: 64a4e8d3740e4ff9c6ff982f
+                store: 64acbc91bf21130026ab01c9
+                subCategory: 64a4f1c41460380a4a93eaaf
+                brand: 649c22055e52e5cf9b1caaf7
+                stock: 45
+                price: 45
+                specifications:
+                  - name: Color
+                    values:
+                      - name: Red
+                        extraAmount: 234
+                      - name: Blue
+                        extraAmount: 234
+                      - name: Green
+                        extraAmount: 234
+                images:
+                  - >-
+                    https://res.cloudinary.com/dqmazmcph/image/upload/v1692552674/Ecommerce/products/screenshot-from-2023-08-09-11-40-07-1692552672684_ikdvwr.png
+                  - >-
+                    https://res.cloudinary.com/dqmazmcph/image/upload/v1692552680/Ecommerce/products/screenshot-from-2023-08-09-12-08-41-1692552672686_egzeoh.png
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /deactive/649afaf622155218b9b59aee:
+    put:
+      tags:
+        - User
+      summary: block-user
+      requestBody:
+        content: {}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /add/64e259a8efbc7690322cf2e0:
+    post:
+      tags:
+        - Wishlist
+      summary: add-into-wishlist
+      requestBody:
+        content: {}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /remove/64e256a4fdf70bae9dcb07bb:
+    post:
+      tags:
+        - Wishlist
+      summary: remove_from-wishlist
+      requestBody:
+        content: {}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /clear:
+    post:
+      tags:
+        - Wishlist
+      summary: clear-wishlist
+      requestBody:
+        content: {}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Wishlist
+      summary: get-all-wishlists
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
